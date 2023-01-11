@@ -6,6 +6,9 @@ class CaseUser(models.Model):
     username = models.CharField(verbose_name="用户名称", max_length=64)
     password = models.CharField(verbose_name="用户密码", max_length=64)
 
+    def __str__(self):
+        return self.username
+
 
 class CaseModel(models.Model):
     """所属模块库"""
@@ -19,8 +22,8 @@ class CaseModel(models.Model):
 class Case(models.Model):
     """用例库"""
     caseName = models.CharField(verbose_name="用例标题", max_length=64)
-    caseModel = models.ForeignKey(verbose_name="所属模块", to='CaseModel', on_delete=models.CASCADE)
-    caseCreator = models.ForeignKey(verbose_name="创建人", to='CaseUser', on_delete=models.CASCADE)
+    caseModel = models.ForeignKey(verbose_name="所属模块", to='CaseModel', to_field="id", on_delete=models.CASCADE)
+    caseCreator = models.ForeignKey(verbose_name="创建人", to='CaseUser', to_field="id", on_delete=models.CASCADE)
     caseExecutor = models.ForeignKey(CaseUser, related_name='person_user', on_delete=models.CASCADE)
     caseDate = models.DateField(verbose_name="用例创建时间")
     case_choices = (

@@ -5,6 +5,14 @@ from WebCase.utils.form import *
 
 
 def get_case_list(request):
-    data_list = serializers.serialize("json", models.Case.objects.all())
+    # data_list = serializers.serialize("json", models.Case.objects.all())
+    data_list = models.Case.objects.all()
+    # res_list = list(data_list)
+    for obj in data_list:
+        print("模块", obj.get_caseChoices_display())
+    res_list = {
+        "msg": "success",
+        "data": data_list
+    }
     print(data_list)
-    return JsonResponse(data_list, safe=False)
+    return JsonResponse(res_list, safe=False)
