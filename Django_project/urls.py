@@ -15,9 +15,11 @@ Including another URLconf
 """
 # from django.contrib import admin
 from django.urls import path
-from WebCase.views import case_list
+from WebCase.views import case_list,get_functional_test
 
 urlpatterns = [
     # 测试用例列表
-    path('case/list', case_list.get_case_list)
+    path('case/list', case_list.get_case_list),
+    # 功能测试用例管理
+    path('functional/test/case/list', get_functional_test.get_functional_test)
 ]
